@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let preferences = UserDefaults.standard
+        
+        let timesLoadedKey = "timesLoaded"
+        var currentLevel = 0
+        if preferences.object(forKey: timesLoadedKey) == nil {
+            preferences.set(currentLevel, forKey: timesLoadedKey)
+        } else {
+            currentLevel = preferences.integer(forKey: timesLoadedKey)
+            currentLevel += 1
+            preferences.set(currentLevel, forKey: timesLoadedKey)
+        }
+        print(currentLevel)
+        //  Save to disk
+        let didSave = preferences.synchronize()
+        
+        if !didSave {
+            //  Couldn't save (I've never seen this happen in real world testing)
+        }
         return true
     }
 
@@ -34,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
