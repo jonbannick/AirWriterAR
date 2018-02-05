@@ -127,7 +127,7 @@ class ImageController: UIViewController, UIDocumentInteractionControllerDelegate
         }
         
         if(currentLevel > 10 && currentLevel % 5 == 0){
-            UnityAds.initialize("1580799", delegate: self)
+            UnityAds.initialize("", delegate: self)
             //UnityAds.initialize("1580799", delegate: self, testMode: true)
         }
         

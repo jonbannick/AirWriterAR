@@ -153,7 +153,7 @@ class VideoController: UIViewController, UnityAdsDelegate,UIDocumentInteractionC
             //  Couldn't save (I've never seen this happen in real world testing)
         }
         if(currentLevel > 10 && currentLevel % 5 == 0){
-            UnityAds.initialize("1580799", delegate: self)
+            UnityAds.initialize("", delegate: self)
         }
         
         let backButton = UIButton(frame: CGRect(x: 0, y: fbView.frame.maxY + 20, width: view.frame.width, height: 40))
